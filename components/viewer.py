@@ -60,74 +60,65 @@ def show_timetable_viewer():
         semester = st.selectbox("Select Semester", ["Semester I", "Semester III"], key="v_sem")
 
     data = timetables[program][semester]
-    df = pd.DataFrame(data, columns=days)
 
-    
+    st.markdown("### 🗓️ Weekly Timetable (with Lab Merging)")
 
-    # Clean and limit to valid rows
-    filtered_data = []
-    for row in data:
-        if any(cell.strip() for cell in row[1:]):  # Keep rows that have at least one subject
-            filtered_data.append(row)
-        if len(filtered_data) == len(time_slots):  # Stop after 7 time slots
-            break
+    # Build HTML table with merged lab rows
+    html = "<table border='1' style='border-collapse: collapse; width: 100%; text-align: center;'>"
+    html += "<thead><tr>" + "".join(f"<th>{d}</th>" for d in days) + "</tr></thead><tbody>"
 
-    df = pd.DataFrame(filtered_data, columns=days)
+    skip_next = [False] * (len(days) - 1)  # skip_next[i] tells us to skip the cell below due to rowspan
 
-    
-    st.markdown("### 🗓️ Weekly Timetable")
-    styled_df = df.style.applymap(highlight_cells, subset=pd.IndexSlice[:, df.columns[1:]])
-    st.dataframe(styled_df, use_container_width=True, height=420)
+    for i in range(min(len(data), len(time_slots))):
+        row = data[i]
+        html += "<tr>"
+        html += f"<td>{row[0]}</td>"  # Time column
 
-        # Faculty involved
+        for j in range(1, len(days)):
+            if skip_next[j - 1]:
+                skip_next[j - 1] = False
+                continue
+
+            cell = row[j]
+            next_cell = data[i + 1][j] if i + 1 < len(data) else ""
+
+            if cell and cell == next_cell and cell.startswith("L"):  # Lab spanning 2 rows
+                color = subject_colors.get(cell.split()[0], "#f0f0f0")
+                html += f"<td rowspan='2' style='background-color:{color}; font-weight:bold'>{cell}</td>"
+                skip_next[j - 1] = True
+            else:
+                style = highlight_cells(cell)
+                html += f"<td style='{style}'>{cell}</td>"
+
+        html += "</tr>"
+    html += "</tbody></table>"
+
+    st.markdown(html, unsafe_allow_html=True)
+
+    # Faculty involved
     st.markdown("### 👨‍🏫 Faculty Involved")
     faculty_codes = extract_faculty_codes(data)
     filtered_faculty = {code: faculties.get(code, "Unknown") for code in faculty_codes}
     st.table(pd.DataFrame(list(filtered_faculty.items()), columns=["Code", "Faculty"]))
 
-    # Faculty-specific filter
+    # Optional: Filter by faculty
     st.markdown("### 🔍 Filter Timetable by Faculty (Optional)")
-    filter_by_faculty = st.checkbox("Show Faculty wise Timetable")
-
-    if filter_by_faculty:
+    if st.checkbox("Show Faculty wise Timetable"):
         selected_faculty = st.selectbox("Select Faculty Code", faculty_codes)
-        # Filter the timetable
         filtered = []
         for row in data:
             new_row = [row[0]]
             for cell in row[1:]:
-                if f"({selected_faculty})" in cell:
-                    new_row.append(cell)
-                else:
-                    new_row.append("")
+                new_row.append(cell if f"({selected_faculty})" in cell else "")
             filtered.append(new_row)
+
+        # Show filtered as DataFrame
         df_filtered = pd.DataFrame(filtered, columns=days)
         st.markdown(f"### 📋 Timetable for Faculty: **{selected_faculty} - {faculties.get(selected_faculty)}**")
         styled_df = df_filtered.style.applymap(highlight_cells, subset=pd.IndexSlice[:, df_filtered.columns[1:]])
         st.dataframe(styled_df, use_container_width=True, height=420)
 
     # Subject summary
-    st.markdown("### 📊 Subject-wise Class Distribution")
-    subject_summary = get_subject_summary(data)
-    subj_name_dict = subjects.get(program, {}).get(semester, {})
-    
-    if subject_summary:
-        summary_data = []
-        for subject in sorted(subject_summary):  # sorted by code
-            count = subject_summary[subject]
-            name = subj_name_dict.get(subject, "Unknown Subject")
-            color = subject_colors.get(subject, "#ffffff")
-            color_patch = f"<div style='background-color:{color};width:50px;height:20px;border:1px solid #ccc'></div>"
-            summary_data.append((subject, name, count, color_patch))
-        st.markdown(
-            pd.DataFrame(summary_data, columns=["Code", "Subject", "No. of Classes", "Color"])
-            .to_html(escape=False, index=False),
-            unsafe_allow_html=True
-        )
-    else:
-        st.info("No subjects found in this timetable.")
-
-
     st.markdown("### 📊 Subject-wise Class Distribution")
     subject_summary = get_subject_summary(data)
     subj_name_dict = subjects.get(program, {}).get(semester, {})

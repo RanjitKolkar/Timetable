@@ -14,3 +14,4 @@ def save_json(filename, data):
 
 faculties = load_json("faculties.json")
 subjects = load_json("subjects.json")
+timetables = load_json("timetable.json")
