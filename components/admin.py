@@ -23,7 +23,7 @@ time_slots = [
     "05.00 - 06.00"
 ]
 
-ADMIN_PASSWORD = "a"  # 🔐 Hardcoded
+ADMIN_PASSWORD = "ab"  # 🔐 Hardcoded
 
 # Helper to write JSON
 def save_json(data, path):
