@@ -1,0 +1,34 @@
+{
+  "MSc DFIS": {
+    "Semester I": {
+      "P1": "Computer Forensics",
+      "P2": "Cyber Security Audit and compliance",
+      "P3": "Incident Response Management",
+      "P4": "Python & Scripting",
+      "P5": "Introduction to forensic science & Law",
+      "L1": "Computer Forensics Laboratory",
+      "L2": "Incident Response Management Laboratory",
+      "L3": "Python & Scripting Laboratory"
+    },
+    "Semester III": {
+      "P1": "Mobile Forensics",
+      "P2": "IoT Security & Forensics",
+      "P3": "Blockchain & Cryptocurrencies",
+      "P4": "Critical Infrastructure Security/Cloud Security & Forensics",
+      "P5": "Social Network Analysis",
+      "L1": "Mobile Forensics Lab",
+      "L2": "IoT Security & Forensics Lab",
+      "L3": "Blockchain & Cryptocurrencies Lab",
+      "L4": "Cloud Security & Forensics Lab",
+      "L5": "Social Network Analysis Lab"
+    }
+  },
+  "MSc CS": {
+    "Semester I": {},
+    "Semester III": {}
+  },
+  "MTech Cyber Security": {
+    "Semester I": {},
+    "Semester III": {}
+  }
+}
