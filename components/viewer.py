@@ -51,7 +51,6 @@ def get_subject_summary(timetable):
     return subject_counts
 
 def show_timetable_viewer():
-    st.title("📚 Timetable Viewer")
 
     col1, col2 = st.columns(2)
     with col1:
@@ -96,7 +95,6 @@ def show_timetable_viewer():
     st.markdown(html, unsafe_allow_html=True)
 
     # Faculty involved
-    st.markdown("### 👨‍🏫 Faculty Involved")
     faculty_codes = extract_faculty_codes(data)
     filtered_faculty = {code: faculties.get(code, "Unknown") for code in faculty_codes}
     st.table(pd.DataFrame(list(filtered_faculty.items()), columns=["Code", "Faculty"]))

@@ -1,34 +1,30 @@
 {
-
-"MSc DFIS": {
-  "Semester I": {
-    "P1": "CTMSDFIS SI P1 - Computer Forensics",
-    "P2": "CTMSDFIS SI P2 - Cyber Security Audit and Compliance",
-    "P3": "CTMSDFIS SI P3 - Incident Response Management",
-    "P4": "CTMSDFIS SI P4 - Python & Scripting",
-    "P5": "CTMSDFIS SI P5 - Introduction to Forensic Science & Law",
-    "L1": "CTMSDFIS SI L1 - Computer Forensics Laboratory",
-    "L2": "CTMSDFIS SI L2 - Incident Response Management Laboratory",
-    "L3": "CTMSDFIS SI L3 - Python & Scripting Laboratory"
-  }
-},
-
   "MSc DFIS": {
+    "Semester I": {
+      "P1": "CTMSDFIS SI P1 - Computer Forensics",
+      "P2": "CTMSDFIS SI P2 - Cyber Security Audit and Compliance",
+      "P3": "CTMSDFIS SI P3 - Incident Response Management",
+      "P4": "CTMSDFIS SI P4 - Python & Scripting",
+      "P5": "CTMSDFIS SI P5 - Introduction to Forensic Science & Law",
+      "L1": "CTMSDFIS SI L1 - Computer Forensics Laboratory",
+      "L2": "CTMSDFIS SI L2 - Incident Response Management Laboratory",
+      "L3": "CTMSDFIS SI L3 - Python & Scripting Laboratory"
+    },
     "Semester III": {
-      "P1": "CTMSDFIS SIII P1- Mobile Forensics",
-      "P2": "CTMSDFIS SIII P2- IoT Security & Forensics",
-      "P3": "CTMSDFIS SIII P3- Blockchain & Cryptocurrencies",
-      "P4": "CTMSDFIS SIII P4- Critical Infrastructure Security/Cloud Security & Forensics",
-      "P5": "CTMSDFIS SIII P5- Social Network Analysis",
-      "L1": "CTMSDFIS SIII L1- Mobile Forensics",
-      "L2": "CTMSDFIS SIII L2- IoT Security & Forensics",
-      "L3": "CTMSDFIS SIII L3- Blockchain & Cryptocurrencies",
-      "L4": "CTMSDFIS SIII L4- Cloud Security & Forensics",
-      "L5": "CTMSDFIS SIII L5- Social Network Analysis",
-      "CDC":"Cyber Defense Center"
+      "P1": "CTMSDFIS SIII P1 - Mobile Forensics",
+      "P2": "CTMSDFIS SIII P2 - IoT Security & Forensics",
+      "P3": "CTMSDFIS SIII P3 - Blockchain & Cryptocurrencies",
+      "P4": "CTMSDFIS SIII P4 - Critical Infrastructure Security/Cloud Security & Forensics",
+      "P5": "CTMSDFIS SIII P5 - Social Network Analysis",
+      "L1": "CTMSDFIS SIII L1 - Mobile Forensics",
+      "L2": "CTMSDFIS SIII L2 - IoT Security & Forensics",
+      "L3": "CTMSDFIS SIII L3 - Blockchain & Cryptocurrencies",
+      "L4": "CTMSDFIS SIII L4 - Cloud Security & Forensics",
+      "L5": "CTMSDFIS SIII L5 - Social Network Analysis",
+      "CDC": "Cyber Defense Center"
     }
   },
-  
+
   "MSc CS": {
     "Semester I": {
       "P1": "CTMSCS S1 P1 - Essentials of Cyber Security & Cyber Warfare",
@@ -54,19 +50,18 @@
     }
   },
 
-  "MTech Cyber Security": {    
+  "MTech Cyber Security": {
     "Semester I": {
       "P1": "CTMTAIDS SI P1 - PROGRAMME COORDINATOR DEAN (ACADEMIC)",
       "P2": "CTMTAIDS SI P2 - Network Security and Forensics",
       "P3": "CTMTAIDS SI P3 - Incident Response and Audit Compliances",
       "P4": "CTMTAIDS SI P4 - Fundamentals of Data Science and Machine Learning",
       "P5": "CTMTAIDS SI P5 - Introduction to Forensic Science & Cyber Law",
-      "L1": "CTMTAIDS SI L1 - ",
+      "L1": "CTMTAIDS SI L1 - TBD",
       "L2": "CTMTAIDS SI L2 - Network Security and Forensics",
       "L3": "CTMTAIDS SI L3 - Incident Response and Audit Compliances",
       "L4": "CTMTAIDS SI L4 - Fundamentals of Data Science and Machine Learning"
-    
-},
+    },
     "Semester III": {}
   }
 }
