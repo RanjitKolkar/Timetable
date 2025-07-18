@@ -24,7 +24,8 @@
       "L2": "CTMSDFIS SIII L2- IoT Security & Forensics",
       "L3": "CTMSDFIS SIII L3- Blockchain & Cryptocurrencies",
       "L4": "CTMSDFIS SIII L4- Cloud Security & Forensics",
-      "L5": "CTMSDFIS SIII L5- Social Network Analysis"
+      "L5": "CTMSDFIS SIII L5- Social Network Analysis",
+      "CDC":"Cyber Defense Center"
     }
   },
   
@@ -60,7 +61,7 @@
       "P3": "CTMTAIDS SI P3 - Incident Response and Audit Compliances",
       "P4": "CTMTAIDS SI P4 - Fundamentals of Data Science and Machine Learning",
       "P5": "CTMTAIDS SI P5 - Introduction to Forensic Science & Cyber Law",
-      "L1": "CTMTAIDS SI L1 - PROGRAMME COORDINATOR DEAN (ACADEMIC)",
+      "L1": "CTMTAIDS SI L1 - ",
       "L2": "CTMTAIDS SI L2 - Network Security and Forensics",
       "L3": "CTMTAIDS SI L3 - Incident Response and Audit Compliances",
       "L4": "CTMTAIDS SI L4 - Fundamentals of Data Science and Machine Learning"

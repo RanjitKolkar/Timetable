@@ -65,6 +65,7 @@ def show_timetable_editor():
     # 🔧 Master Editor Section
     st.markdown("## 🛠️ Master Data Editor")
 
+    # ----------- Faculty Editor -------------
     with st.expander("👨‍🏫 Edit Faculties"):
         st.markdown("### Faculty List Editor")
         faculty_df = pd.DataFrame(list(faculties.items()), columns=["Code", "Faculty Name"])
@@ -80,15 +81,26 @@ def show_timetable_editor():
             save_json(faculties, "data/faculties.json")
             st.success("✅ Faculty list saved to faculties.json")
 
+    # ----------- Subject Editor -------------
     with st.expander("📚 Edit Subjects"):
         prog = st.selectbox("Select Program", list(subjects.keys()), key="sub_prog")
         sem = st.selectbox("Select Semester", ["Semester I", "Semester III"], key="sub_sem")
 
-        sub_data = subjects[prog][sem]
+        # Safe access to nested dict
+        sub_data = subjects.get(prog, {}).get(sem, {})
+        if not sub_data:
+            st.warning(f"No subject data found for {prog} - {sem}. You can add subjects below.")
+
         sub_df = pd.DataFrame(list(sub_data.items()), columns=["Code", "Subject Name"])
         edited_sub_df = st.data_editor(sub_df, num_rows="dynamic", use_container_width=True, key="edit_subjects")
 
         if st.button("💾 Save Subjects for Selected Program/Semester"):
+            # Ensure program and semester dicts exist
+            if prog not in subjects:
+                subjects[prog] = {}
+            if sem not in subjects[prog]:
+                subjects[prog][sem] = {}
+
             subjects[prog][sem].clear()
             for _, row in edited_sub_df.iterrows():
                 code = row["Code"].strip()
