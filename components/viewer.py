@@ -1,8 +1,13 @@
 import streamlit as st
 import pandas as pd
 import json
+import plotly.figure_factory as ff
+import io
+from PIL import Image
 from collections import defaultdict
 from data.timetable import time_slots
+from utils.image_exporter import generate_table_image
+
 # Load JSON data directly
 with open("data/timetable.json") as f:
     timetables = json.load(f)
@@ -60,11 +65,22 @@ def show_timetable_viewer():
 
     data = timetables[program][semester]
 
-    st.markdown("### 🗓️ Weekly Timetable (with Lab Merging)")
+    st.markdown("🗓️ Weekly Timetable")
 
     # Build HTML table with merged lab rows
     html = "<table border='1' style='border-collapse: collapse; width: 100%; text-align: center;'>"
     html += "<thead><tr>" + "".join(f"<th>{d}</th>" for d in days) + "</tr></thead><tbody>"
+
+    # 📥 Downloadable PNG of full timetable
+    df_image = pd.DataFrame(data, columns=days)
+    image_buf = generate_table_image(df_image, f"{program} - {semester} Timetable")
+
+    st.download_button(
+        label="📥 Download Timetable as PNG",
+        data=image_buf,
+        file_name=f"{program}_{semester}_timetable.png".replace(" ", "_"),
+        mime="image/png"
+    )
 
     skip_next = [False] * (len(days) - 1)  # skip_next[i] tells us to skip the cell below due to rowspan
 
@@ -94,27 +110,41 @@ def show_timetable_viewer():
 
     st.markdown(html, unsafe_allow_html=True)
 
-    # Faculty involved
-    faculty_codes = extract_faculty_codes(data)
-    filtered_faculty = {code: faculties.get(code, "Unknown") for code in faculty_codes}
-    st.table(pd.DataFrame(list(filtered_faculty.items()), columns=["Code", "Faculty"]))
+       # Subject-Faculty mapping table with subject name
+    subject_faculty_map = []
 
-    # Optional: Filter by faculty
-    st.markdown("### 🔍 Filter Timetable by Faculty (Optional)")
-    if st.checkbox("Show Faculty wise Timetable"):
-        selected_faculty = st.selectbox("Select Faculty Code", faculty_codes)
-        filtered = []
-        for row in data:
-            new_row = [row[0]]
-            for cell in row[1:]:
-                new_row.append(cell if f"({selected_faculty})" in cell else "")
-            filtered.append(new_row)
+    # Extract data from timetable
+    subject_name_dict = subjects.get(program, {}).get(semester, {})
 
-        # Show filtered as DataFrame
-        df_filtered = pd.DataFrame(filtered, columns=days)
-        st.markdown(f"### 📋 Timetable for Faculty: **{selected_faculty} - {faculties.get(selected_faculty)}**")
-        styled_df = df_filtered.style.applymap(highlight_cells, subset=pd.IndexSlice[:, df_filtered.columns[1:]])
-        st.dataframe(styled_df, use_container_width=True, height=420)
+    for row in data:
+        for cell in row[1:]:
+            if "(" in cell and ")" in cell:
+                parts = cell.split("(")
+                subject_code = parts[0].strip()
+                faculty_code = parts[1].replace(")", "").strip()
+                if subject_code and faculty_code:
+                    subject_name = subject_name_dict.get(subject_code, "Unknown Subject")
+                    faculty_name = faculties.get(faculty_code, "Unknown")
+                    subject_entry = f"{subject_name} ({subject_code})"
+                    faculty_entry = f"{faculty_name} ({faculty_code})"
+                    subject_faculty_map.append((subject_code, subject_entry, faculty_entry))
+
+    # Sort by subject_code with 'P' first, then 'L'
+    def sort_key(item):
+        code = item[0]
+        prefix = code[0]
+        number = int(code[1:]) if code[1:].isdigit() else 0
+        return (0 if prefix == 'P' else 1, number)
+
+    # Remove duplicates and sort
+    subject_faculty_map = sorted(set(subject_faculty_map), key=sort_key)
+
+    # Prepare final display without subject_code in a separate column
+    df_map = pd.DataFrame(
+        [(entry[1], entry[2]) for entry in subject_faculty_map],
+        columns=["Subject (Code)", "Faculty (Code)"]
+    )
+    st.markdown(df_map.to_html(index=False), unsafe_allow_html=True)
 
     # Subject summary
     st.markdown("### 📊 Subject-wise Class Distribution")

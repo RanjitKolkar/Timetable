@@ -3,7 +3,7 @@
     "Semester I": [
       [
         "10.00 - 11.00",
-        "P2 (RL)",
+        "P5 (RL)",
         "L2 (RJ)",
         "Library/Mentoring",
         "P2 (CK)",
@@ -13,13 +13,13 @@
         "11.00 - 12.00",
         "P3 (RJ)",
         "L2 (RJ)",
+        "P1 (HP)",
         "P3 (RJ)",
-        "P4 (JD)",
-        ""
+        "P4 (JD)"
       ],
       [
         "12.00 - 01.00",
-        "P1 (RK)",
+        "P1 (HP)",
         "P5 (RL)",
         "P5 (RL)",
         "P2 (CK)",
@@ -38,8 +38,8 @@
         "P2 (CK)",
         "P4 (JD)",
         "L1 (HP)",
-        "P4 (CK)",
-        "P2 (JD)"
+        "P4 (JD)",
+        "P2 (CK)"
       ],
       [
         "03.00 - 04.00",
@@ -55,7 +55,7 @@
         "Library/Mentoring",
         "L3 (JD)",
         "Library/Mentoring",
-        ""
+        "Library/Mentoring"
       ],
       [
         "05.00 - 06.00",
@@ -71,7 +71,7 @@
         "10.00 - 11.00",
         "P2 (PC)",
         "P2 (PC)",
-        "L4 (PC/RJ)",
+        "L4 (PC)",
         "P2 (PC)",
         "Library/Mentoring"
       ],
@@ -79,9 +79,9 @@
         "11.00 - 12.00",
         "P3 (RK)",
         "P3 (RK)",
+        "L4 (PC)",
         "P5 (HP)",
-        "P5 (HP)",
-        ""
+        "P5 (HP)"
       ],
       [
         "12.00 - 01.00",
@@ -101,35 +101,35 @@
       ],
       [
         "02.00 - 03.00",
-        "",
         "L5 (HP)",
         "L2 (PC)",
         "P1 (TK)",
-        "L1 (TK)"
+        "L1 (TK)",
+        "L3 (RK)"
       ],
       [
         "03.00 - 04.00",
         "L5 (HP)",
-        "",
-        "",
-        "",
-        ""
+        "L2 (PC)",
+        "CDC (RK)",
+        "L1 (TK)",
+        "L3 (RK)"
       ],
       [
         "04.00 - 05.00",
-        "L5 (HP)",
+        "P3 (RK)",
         "P4 (PC)",
         "Library/Mentoring",
         "P1 (TK)",
         "P5 (HP)"
       ],
       [
-        "04.00 - 05.00",
-        "Library/Mentoring",
-        "P4 (PC)",
-        "Library/Mentoring",
-        "P1 (TK)",
-        "P5 (HP)"
+        "05.00 - 06.00",
+        null,
+        null,
+        null,
+        null,
+        null
       ]
     ]
   },
@@ -178,10 +178,10 @@
       [
         "03.00 - 04.00",
         "P1 (LC)",
+        "L3 (LC)",
         "Library/Mentoring",
-        "L1 (CK)",
-        "P1 (LC)",
-        ""
+        "L2 (RJ)",
+        "L1 (CK)"
       ],
       [
         "04.00 - 05.00",
@@ -189,15 +189,15 @@
         "Library/Mentoring",
         "Library/Mentoring",
         "Library/Mentoring",
-        ""
+        "L1 (CK)"
       ],
       [
         "04.00 - 05.00",
         "Library/Mentoring",
-        "P4 (PC)",
         "Library/Mentoring",
-        "P1 (TK)",
-        "P5 (HP)"
+        "Library/Mentoring",
+        "Library/Mentoring",
+        "Library/Mentoring"
       ]
     ],
     "Semester III": [
@@ -207,22 +207,22 @@
         "P2 (PC)",
         "L4 (PC)",
         "P2 (PC)",
-        "Library/Mentoring"
+        "P5 (HP)"
       ],
       [
         "11.00 - 12.00",
-        "P1 (RK)",
-        "P1 (RK)",
+        "P3 (RK)",
+        "P3 (RK)",
+        "L4 (PC)",
         "P5 (HP)",
-        "P5 (HP)",
-        ""
+        "P4 (RJ)"
       ],
       [
         "12.00 - 01.00",
-        "Library/Mentoring",
+        "P1 (TK)",
         "P4 (PC)",
-        "P3 (RJ)",
-        "P3 (RJ)",
+        "P4 (RJ)",
+        "P4 (RJ)",
         "P3 (RJ)"
       ],
       [
@@ -235,35 +235,35 @@
       ],
       [
         "02.00 - 03.00",
-        "",
         "L5 (HP)",
         "L2 (PC)",
-        "P2 (PC)",
-        "L3 (RJ)"
+        "P1 (TK)",
+        "L1 (TK)",
+        "L3 (RK)"
       ],
       [
         "03.00 - 04.00",
-        "CDC",
-        "",
-        "",
-        "",
-        ""
+        "L5 (HP)",
+        "L2 (PC)",
+        "CDC (RK)",
+        "L1 (TK)",
+        "L3 (RK)"
       ],
       [
         "04.00 - 05.00",
-        "P4 (PC)",
-        "P4 (PC)",
-        "Library/Mentoring",
-        "P1 (RK)",
-        "P5 (HP)"
-      ],
-      [
-        "04.00 - 05.00",
-        "Library/Mentoring",
+        "P3 (RK)",
         "P4 (PC)",
         "Library/Mentoring",
         "P1 (TK)",
         "P5 (HP)"
+      ],
+      [
+        "04.00 - 05.00",
+        "Library/Mentoring",
+        "Library/Mentoring",
+        "Library/Mentoring",
+        "Library/Mentoring",
+        "Library/Mentoring"
       ]
     ]
   },
@@ -303,96 +303,30 @@
       ],
       [
         "02.00 - 03.00",
-        "",
         "L1 (RK)",
         "P4 (RK)",
         "P4 (RK)",
-        "L4 (RK)"
+        "L4 (RK)",
+        "L2 (LC)"
       ],
       [
         "03.00 - 04.00",
+        "L1 (RK)",
         "P1 (RK)",
-        "",
         "L3 (JD)",
-        "",
-        ""
+        "L4 (RK)",
+        "L2 (LC)"
       ],
       [
         "04.00 - 05.00",
         "Library/Mentoring",
         "Library/Mentoring",
+        "L3 (JD)",
         "Library/Mentoring",
-        "CDC",
-        "RK"
+        "CDC (RK)"
       ],
       [
         "04.00 - 05.00",
-        "Library/Mentoring",
-        "P4 (PC)",
-        "Library/Mentoring",
-        "P1 (TK)",
-        "P5 (HP)"
-      ]
-    ],
-    "Semester III": [
-      [
-        "10.00 - 11.00",
-        "",
-        "",
-        "",
-        "",
-        ""
-      ],
-      [
-        "11.00 - 12.00",
-        "",
-        "",
-        "",
-        "",
-        ""
-      ],
-      [
-        "12.00 - 01.00",
-        "",
-        "",
-        "",
-        "",
-        ""
-      ],
-      [
-        "01.00 - 02.00",
-        "Lunch break",
-        "Lunch break",
-        "Lunch break",
-        "Lunch break",
-        "Lunch break"
-      ],
-      [
-        "02.00 - 03.00",
-        "",
-        "",
-        "",
-        "",
-        ""
-      ],
-      [
-        "03.00 - 04.00",
-        "",
-        "",
-        "",
-        "",
-        ""
-      ],
-      [
-        "04.00 - 05.00",
-        "",
-        "",
-        "",
-        "",
-        ""
-      ],
-      [
-        "05.00 - 06.00",
         "Library/Mentoring",
         "P4 (PC)",
         "Library/Mentoring",

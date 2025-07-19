@@ -3,6 +3,7 @@ import pandas as pd
 import json
 from collections import defaultdict
 from data.timetable import days, time_slots  # Ensure these are defined
+from utils.image_exporter import generate_table_image
 
 # --- Load JSON data ---
 with open("data/timetable.json") as f:
@@ -52,38 +53,17 @@ def show_faculty_view():
     st.markdown("## 📅 Consolidated Timetable")
     df_consolidated = pd.DataFrame(consolidated, columns=days)
     st.dataframe(df_consolidated, use_container_width=True)
-    import matplotlib.pyplot as plt
-    from io import BytesIO
+    # Generate image from consolidated table
 
-   
-    # --- Generate downloadable PNG ---
-    def create_timetable_image(df, faculty_code):
-        fig, ax = plt.subplots(figsize=(10, 5))
-        ax.axis('tight')
-        ax.axis('off')
-        table_data = [df.columns.tolist()] + df.values.tolist()
-        table = ax.table(cellText=table_data, cellLoc='center', loc='center')
-        table.auto_set_font_size(False)
-        table.set_fontsize(10)
-        table.scale(1.2, 1.5)
-        plt.title(f"Consolidated Timetable for {faculty_code}", fontsize=14, weight='bold')
+    image_buf = generate_table_image(df_consolidated, f"Consolidated Timetable for {faculty_code}")
 
-        buf = BytesIO()
-        plt.savefig(buf, format="png", bbox_inches="tight")
-        plt.close(fig)
-        buf.seek(0)
-        return buf
-
-    image_buf = create_timetable_image(df_consolidated, faculty_code)
-
-    # --- Download Button ---
+    # Download button
     st.download_button(
         label="📥 Download PNG",
         data=image_buf,
         file_name=f"{faculty_code}_timetable.png",
         mime="image/png"
     )
-
     # --- Load Summary ---
     st.markdown("## ⏱️ Load Distribution")
     if detailed_load:
