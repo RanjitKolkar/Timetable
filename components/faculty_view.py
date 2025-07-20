@@ -119,6 +119,12 @@ def show_faculty_view():
     html += "</table>"
     st.markdown(html, unsafe_allow_html=True)
 
+    legend_html = "<div style='display: flex; gap: 5px;'>"
+    for key, color in color_map.items():
+        legend_html += f"<div style='background:{color};padding:6px 12px;border-radius:4px;'>{key}</div>"
+    legend_html += "</div>"
+    st.markdown(legend_html, unsafe_allow_html=True)
+
     # Create df_consolidated for image generation (without colors)
     df_consolidated = pd.DataFrame(consolidated, columns=days)
     # Downloadable image
