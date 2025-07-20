@@ -63,5 +63,31 @@
       "L4": "CTMTAIDS SI L4 - Fundamentals of Data Science and Machine Learning"
     },
     "Semester III": {}
+  },
+  "MSc FS": {
+    "Semester I": {
+    "P1": "FSMS SI-1 - Introduction to Forensics, Psychology, Law and Statistics",
+    "P2": "FSMS SI-2 - Instrumental Techniques",
+    "P3": "FSMS SI-3 - Crime Scene Management and Forensic Physics",
+    "P4": "FSMS SI-4 - Fingerprints and Questioned Documents",
+    "P5": "FSMS SI-5 - Forensic Biology and Anthropology",
+    "L1": "FSMS SI LC1 - Laboratory Course 1",
+    "L2": "FSMS SI LC2 - Laboratory Course 2"
+    }
+  },
+
+  "MSc FS Forensic Chem and Toxi": {
+  "Semester III": {
+    "P1": "FSMS-SP1-P1 / UGFS S7 SP 3 P1 - Forensic Pharmacology and Pharmaceutical Drug Analysis / Forensic Pharmacy and Pharmacology of Controlled Drugs",
+    "P2": "FSMS-SP1-P2 / UGFS S7 SP 3 P2 - Advanced Forensic Toxicology",
+    "P3": "FSMS-SP1-P3 / UGFS S7 SP 3 P3 - Modern and Applied Analytical Forensic Chemistry",
+    "P4": "FSMS-EL 7 / UGFS S7 SP 1/2/3/4/5 P4 - Research Methodology (RM)",
+    "P5": "FSMS-EL 9 / UGFS S7 CE-5 - Machine Learning for Data Science (MLDS) / Data Science and Artificial Intelligence (DSAI)",
+    "P6": "UGFS S7 CE-5 - Forensic Photography (FP)",
+    "P7": "FSMS-EL 4 - Anti-Dope Forensics"
+  }
+
+
   }
 }
+

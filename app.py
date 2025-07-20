@@ -6,6 +6,7 @@ from components.viewer import show_timetable_viewer
 from components.admin import show_timetable_editor
 from components.faculty_view import show_faculty_view  # 👈 Import after setting config
 from components.load_distribution import show_faculty_load_distribution  # 👈 Add this import
+
 st.title("📚 NFSU Goa Timetable Manager")
 
 tabs = st.tabs(["📘 View Timetable", "👨‍🏫 Faculty View", "📊 Load Summary", "🛠️ Admin Panel"])
