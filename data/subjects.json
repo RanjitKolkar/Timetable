@@ -60,7 +60,8 @@
       "L1": "CTMTAIDS SI L1 - TBD",
       "L2": "CTMTAIDS SI L2 - Network Security and Forensics",
       "L3": "CTMTAIDS SI L3 - Incident Response and Audit Compliances",
-      "L4": "CTMTAIDS SI L4 - Fundamentals of Data Science and Machine Learning"
+      "L4": "CTMTAIDS SI L4 - Fundamentals of Data Science and Machine Learning",
+      "CDC": "Cyber Defense Center"
     },
     "Semester III": {}
   },
