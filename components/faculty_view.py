@@ -28,7 +28,7 @@ def extract_faculty_cells(timetable, faculty_code):
     program_abbr = {
         "MSc CS": "CS",
         "MSc DFIS": "DF",
-        "MTech Cyber Security": "MT",
+        "MTech AI & DS": "MT",
         "MSc FS": "FS"
     }
 
