@@ -21,6 +21,28 @@
       "L2": "CTMSDFIS SII L2 - Web Application Security Laboratory",
       "L3": "CTMSDFIS SII L3 - Malware Analysis & Forensics Laboratory",
       "L4": "CTMSDFIS SII L4 - Artificial Intelligence Laboratory"
+    },
+    "Semester III": {
+      "P1": "CTMSDFIS SII P1 - Mobile Forensics",
+      "P2": "CTMSDFIS SII P2 - Web Application Security",
+      "P3": "CTMSDFIS SII P3 - Malware Analysis & Forensics",
+      "P4": "CTMSDFIS SII P4 - Artificial Intelligence",
+      "P5": "CTMSDFIS SII P5 - Minor Project",
+      "L1": "CTMSDFIS SII L1 - Mobile Forensics Laboratory",
+      "L2": "CTMSDFIS SII L2 - Web Application Security Laboratory",
+      "L3": "CTMSDFIS SII L3 - Malware Analysis & Forensics Laboratory",
+      "L4": "CTMSDFIS SII L4 - Artificial Intelligence Laboratory"
+    },
+    "Semester IV": {
+      "P1": "CTMSDFIS SII P1 - Mobile Forensics",
+      "P2": "CTMSDFIS SII P2 - Web Application Security",
+      "P3": "CTMSDFIS SII P3 - Malware Analysis & Forensics",
+      "P4": "CTMSDFIS SII P4 - Artificial Intelligence",
+      "P5": "CTMSDFIS SII P5 - Minor Project",
+      "L1": "CTMSDFIS SII L1 - Mobile Forensics Laboratory",
+      "L2": "CTMSDFIS SII L2 - Web Application Security Laboratory",
+      "L3": "CTMSDFIS SII L3 - Malware Analysis & Forensics Laboratory",
+      "L4": "CTMSDFIS SII L4 - Artificial Intelligence Laboratory"
     }
   },
   "MTech AI & DS": {
@@ -49,6 +71,32 @@
       "L4": "CTMTAIDS SII L4 - Intelligent Systems and Security Laboratory",
       "L5": "CTMTAIDS SII L5 - Program Elective Laboratory",
       "CDC": "Cyber Defense Center"
+    },
+    "Semester III": {
+      "P1": "CTMTAIDS SII P1 - Advanced Machine Learning for Cyber Security and Forensics",
+      "P2": "CTMTAIDS SII P2 - Mobile Security and Forensics",
+      "P3": "CTMTAIDS SII P3 - Natural Language Processing",
+      "P4": "CTMTAIDS SII P4 - Intelligent Systems and Security",
+      "P5": "CTMTAIDS SII P5 - Program Elective",
+      "L1": "CTMTAIDS SII L1 - Advanced Machine Learning for Cyber Security and Forensics Laboratory",
+      "L2": "CTMTAIDS SII L2 - Mobile Security and Forensics Laboratory",
+      "L3": "CTMTAIDS SII L3 - Natural Language Processing Laboratory",
+      "L4": "CTMTAIDS SII L4 - Intelligent Systems and Security Laboratory",
+      "L5": "CTMTAIDS SII L5 - Program Elective Laboratory",
+      "CDC": "Cyber Defense Center"
+    },
+    "Semester IV": {
+      "P1": "CTMTAIDS SII P1 - Advanced Machine Learning for Cyber Security and Forensics",
+      "P2": "CTMTAIDS SII P2 - Mobile Security and Forensics",
+      "P3": "CTMTAIDS SII P3 - Natural Language Processing",
+      "P4": "CTMTAIDS SII P4 - Intelligent Systems and Security",
+      "P5": "CTMTAIDS SII P5 - Program Elective",
+      "L1": "CTMTAIDS SII L1 - Advanced Machine Learning for Cyber Security and Forensics Laboratory",
+      "L2": "CTMTAIDS SII L2 - Mobile Security and Forensics Laboratory",
+      "L3": "CTMTAIDS SII L3 - Natural Language Processing Laboratory",
+      "L4": "CTMTAIDS SII L4 - Intelligent Systems and Security Laboratory",
+      "L5": "CTMTAIDS SII L5 - Program Elective Laboratory",
+      "CDC": "Cyber Defense Center"
     }
   },
   "MSc FS": {
@@ -62,6 +110,24 @@
       "L2": "FSMS SI LC2 - Laboratory Course 2"
     },
     "Semester I": {
+      "P1": "FSMS SI-1 - Introduction to Forensics, Psychology, Law and Statistics",
+      "P2": "FSMS SI-2 - Instrumental Techniques",
+      "P3": "FSMS SI-3 - Crime Scene Management and Forensic Physics",
+      "P4": "FSMS SI-4 - Fingerprints and Questioned Documents",
+      "P5": "FSMS SI-5 - Forensic Biology and Anthropology",
+      "L1": "FSMS SI LC1 - Laboratory Course 1",
+      "L2": "FSMS SI LC2 - Laboratory Course 2"
+    },
+    "Semester III": {
+      "P1": "FSMS SI-1 - Introduction to Forensics, Psychology, Law and Statistics",
+      "P2": "FSMS SI-2 - Instrumental Techniques",
+      "P3": "FSMS SI-3 - Crime Scene Management and Forensic Physics",
+      "P4": "FSMS SI-4 - Fingerprints and Questioned Documents",
+      "P5": "FSMS SI-5 - Forensic Biology and Anthropology",
+      "L1": "FSMS SI LC1 - Laboratory Course 1",
+      "L2": "FSMS SI LC2 - Laboratory Course 2"
+    },
+    "Semester IV": {
       "P1": "FSMS SI-1 - Introduction to Forensics, Psychology, Law and Statistics",
       "P2": "FSMS SI-2 - Instrumental Techniques",
       "P3": "FSMS SI-3 - Crime Scene Management and Forensic Physics",
@@ -104,6 +170,28 @@
       "L4": "CTMSCS SII L4 - Incident Response and Digital Forensics Laboratory"
     },
     "Semester I": {
+      "P1": "CTMSCS SII P1 - Network Security",
+      "P2": "CTMSCS SII P2 - Malware Analysis",
+      "P3": "CTMSCS SII P3 - Mobile Security",
+      "P4": "CTMSCS SII P4 - Incident Response and Digital Forensics",
+      "P5": "CTMSCS SII P5 - Minor Project",
+      "L1": "CTMSCS SII L1 - Network Security Laboratory",
+      "L2": "CTMSCS SII L2 - Malware Analysis Laboratory",
+      "L3": "CTMSCS SII L3 - Mobile Security Laboratory",
+      "L4": "CTMSCS SII L4 - Incident Response and Digital Forensics Laboratory"
+    },
+    "Semester III": {
+      "P1": "CTMSCS SII P1 - Network Security",
+      "P2": "CTMSCS SII P2 - Malware Analysis",
+      "P3": "CTMSCS SII P3 - Mobile Security",
+      "P4": "CTMSCS SII P4 - Incident Response and Digital Forensics",
+      "P5": "CTMSCS SII P5 - Minor Project",
+      "L1": "CTMSCS SII L1 - Network Security Laboratory",
+      "L2": "CTMSCS SII L2 - Malware Analysis Laboratory",
+      "L3": "CTMSCS SII L3 - Mobile Security Laboratory",
+      "L4": "CTMSCS SII L4 - Incident Response and Digital Forensics Laboratory"
+    },
+    "Semester IV": {
       "P1": "CTMSCS SII P1 - Network Security",
       "P2": "CTMSCS SII P2 - Malware Analysis",
       "P3": "CTMSCS SII P3 - Mobile Security",

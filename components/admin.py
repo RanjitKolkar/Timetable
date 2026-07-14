@@ -113,6 +113,50 @@ def semester_parity_matches(semester_name, parity):
     return sem_number % 2 == 0
 
 
+def is_bsc_program(program):
+    if not isinstance(program, str):
+        return False
+    name = program.lower().replace(".", "").replace(" ", "")
+    return "bsc" in name or "bachelor" in name
+
+
+def ensure_bsc_semesters(program, total_semesters=10):
+    if not is_bsc_program(program):
+        return False
+
+    existing = set(get_program_semesters(program))
+    base_odd = "Semester I"
+    base_even = "Semester II"
+    changed = False
+
+    for sem_number in range(1, total_semesters + 1):
+        sem_name = build_semester_name(sem_number)
+        if sem_name in existing:
+            continue
+
+        if sem_number % 2 == 1:
+            if base_odd in existing:
+                clone_semester_data(program, base_odd, sem_name)
+            elif base_even in existing:
+                clone_semester_data(program, base_even, sem_name)
+            else:
+                create_blank_semester(program, sem_name, template_semester=base_odd)
+        else:
+            if base_even in existing:
+                clone_semester_data(program, base_even, sem_name)
+            elif base_odd in existing:
+                clone_semester_data(program, base_odd, sem_name)
+            else:
+                create_blank_semester(program, sem_name, template_semester=base_even)
+
+        changed = True
+        existing.add(sem_name)
+
+    if changed:
+        save_all_state()
+    return changed
+
+
 def delete_program(program):
     if program in timetables:
         del timetables[program]
@@ -443,6 +487,8 @@ def show_admin():
             key="semester_parity"
         )
 
+    ensure_bsc_semesters(program, total_semesters=10)
+
     available_semesters = [
         sem for sem in get_program_semesters(program)
         if semester_parity_matches(sem, semester_type)
@@ -450,11 +496,6 @@ def show_admin():
     if not available_semesters:
         st.warning(f"No {semester_type.lower()} semesters found for {program}.")
         return
-
-    if st.button("Generate missing semesters for 10-semester programs", key="generate_semesters_btn"):
-        generate_missing_semesters(program, total_semesters=10)
-        st.success("✅ Missing semesters generated for this program.")
-        st.experimental_rerun()
 
     semester = st.selectbox("Selected Semester", available_semesters, key="admin_semester")
 

@@ -62,6 +62,19 @@
       "L4": "CTMTAIDS SII L4 - Intelligent Systems and Security Laboratory",
       "L5": "CTMTAIDS SII L5 - Program Elective Laboratory",
       "CDC": "Cyber Defense Center"
+    },
+    "Semester III": {
+      "P1": "CTMTAIDS SII P1 - Advanced Machine Learning for Cyber Security and Forensics",
+      "P2": "CTMTAIDS SII P2 - Mobile Security and Forensics",
+      "P3": "CTMTAIDS SII P3 - Natural Language Processing",
+      "P4": "CTMTAIDS SII P4 - Intelligent Systems and Security",
+      "P5": "CTMTAIDS SII P5 - Program Elective",
+      "L1": "CTMTAIDS SII L1 - Advanced Machine Learning for Cyber Security and Forensics Laboratory",
+      "L2": "CTMTAIDS SII L2 - Mobile Security and Forensics Laboratory",
+      "L3": "CTMTAIDS SII L3 - Natural Language Processing Laboratory",
+      "L4": "CTMTAIDS SII L4 - Intelligent Systems and Security Laboratory",
+      "L5": "CTMTAIDS SII L5 - Program Elective Laboratory",
+      "CDC": "Cyber Defense Center"
     }
   },
   "MSc DFIS": {
@@ -99,7 +112,10 @@
       "L3": "CTMSDFIS SIII L3 - Blockchain and Cryptocurrency Laboratory",
       "L4": "CTMSDFIS SIII L4 - Program Elective 1 Laboratory",
       "L5": "CTMSDFIS SIII L5 - Program Elective 2 Laboratory"
-    }
+    },
+    "Semester IV": {
+      "P1": "CTMTAIDS SIV P1 - Major Project "
+          }
   }
 
 }

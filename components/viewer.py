@@ -1,3 +1,4 @@
+import copy
 import re
 import streamlit as st
 import pandas as pd
@@ -46,6 +47,93 @@ def parse_semester_number(semester_name):
     return None
 
 
+def save_json(data, path):
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2)
+
+
+def clone_semester_data(program, source_semester, target_semester):
+    timetables.setdefault(program, {})
+    subjects.setdefault(program, {})
+    subject_metadata.setdefault(program, {})
+    subject_faculty_map.setdefault(program, {})
+    semester_metadata.setdefault(program, {})
+    if source_semester in timetables.get(program, {}):
+        timetables[program][target_semester] = copy.deepcopy(timetables[program][source_semester])
+    if source_semester in subjects.get(program, {}):
+        subjects[program][target_semester] = copy.deepcopy(subjects[program][source_semester])
+    if source_semester in subject_metadata.get(program, {}):
+        subject_metadata[program][target_semester] = copy.deepcopy(subject_metadata[program][source_semester])
+    if source_semester in subject_faculty_map.get(program, {}):
+        subject_faculty_map[program][target_semester] = copy.deepcopy(subject_faculty_map[program][source_semester])
+    if source_semester in semester_metadata.get(program, {}):
+        semester_metadata[program][target_semester] = copy.deepcopy(semester_metadata[program][source_semester])
+
+
+def create_blank_semester(program, target_semester, template_semester=None):
+    timetables.setdefault(program, {})
+    subjects.setdefault(program, {})
+    subject_faculty_map.setdefault(program, {})
+    if template_semester in timetables.get(program, {}):
+        template = timetables[program][template_semester]
+        rows = len(template)
+        cols = len(template[0]) if template else 6
+    else:
+        rows = 10
+        cols = 6
+    timetables[program][target_semester] = [["" for _ in range(cols)] for _ in range(rows)]
+    subjects[program][target_semester] = {}
+    subject_faculty_map[program][target_semester] = {}
+
+
+def is_bsc_program(program):
+    if not isinstance(program, str):
+        return False
+    identifier = program.lower().replace(".", "").replace(" ", "")
+    return "bsc" in identifier or "baccalaure" in identifier
+
+
+def ensure_bsc_semesters(program, total_semesters=10):
+    if not is_bsc_program(program):
+        return False
+
+    existing = set(sort_semesters(timetables.get(program, {}).keys()))
+    base_odd = "Semester I"
+    base_even = "Semester II"
+    changed = False
+
+    for sem_number in range(1, total_semesters + 1):
+        sem_name = f"Semester {sem_number}" if sem_number > 10 else ["", "Semester I", "Semester II", "Semester III", "Semester IV", "Semester V", "Semester VI", "Semester VII", "Semester VIII", "Semester IX", "Semester X"][sem_number]
+        if sem_name in existing:
+            continue
+
+        if sem_number % 2 == 1:
+            if base_odd in existing:
+                clone_semester_data(program, base_odd, sem_name)
+            elif base_even in existing:
+                clone_semester_data(program, base_even, sem_name)
+            else:
+                create_blank_semester(program, sem_name, template_semester=base_odd)
+        else:
+            if base_even in existing:
+                clone_semester_data(program, base_even, sem_name)
+            elif base_odd in existing:
+                clone_semester_data(program, base_odd, sem_name)
+            else:
+                create_blank_semester(program, sem_name, template_semester=base_even)
+
+        changed = True
+        existing.add(sem_name)
+
+    if changed:
+        save_json(timetables, "data/timetable.json")
+        save_json(subjects, "data/subjects.json")
+        save_json(subject_metadata, "data/subject_metadata.json")
+        save_json(subject_faculty_map, "data/subject_faculty_map.json")
+        save_json(semester_metadata, "data/semester_metadata.json")
+    return changed
+
+
 def semester_parity_matches(semester_name, parity):
     sem_number = parse_semester_number(semester_name)
     if sem_number is None:
@@ -61,6 +149,12 @@ def extract_subject_code(cell):
 
 with open("data/subjects.json") as f:
     subjects = json.load(f)
+
+try:
+    with open("data/subject_metadata.json") as f:
+        subject_metadata = json.load(f)
+except FileNotFoundError:
+    subject_metadata = {}
 
 with open("data/faculties.json") as f:
     faculties = json.load(f)
@@ -135,6 +229,8 @@ def show_viewer():
         sorted(timetables.keys()),
         key="viewer_program"
     )
+
+    ensure_bsc_semesters(program, total_semesters=10)
 
     filtered_semesters = [
         sem for sem in sort_semesters(timetables[program].keys())
