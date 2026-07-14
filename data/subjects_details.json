@@ -1,0 +1,105 @@
+{
+  "MSc CS": {
+    "Semester I": {
+      "P1": "CTMSCS SI P1 - Essentials of Cyber Security and Cyber Warfare",
+      "P2": "CTMSCS SI P2 - Cyber Security Audit and Compliance",
+      "P3": "CTMSCS SI P3 - Web Application Security",
+      "P4": "CTMSCS SI P4 - Artificial Intelligence",
+      "P5": "CTMSCS SI P5 - Introduction to Forensic Science and Law",
+      "L1": "CTMSCS SI L1 - Essentials of Cyber Security and Cyber Warfare Laboratory",
+      "L2": "CTMSCS SI L2 - Web Application Security Laboratory",
+      "L3": "CTMSCS SI L3 - Artificial Intelligence Laboratory"
+    },
+
+    "Semester II": {
+      "P1": "CTMSCS SII P1 - Network Security",
+      "P2": "CTMSCS SII P2 - Malware Analysis",
+      "P3": "CTMSCS SII P3 - Mobile Security",
+      "P4": "CTMSCS SII P4 - Incident Response and Digital Forensics",
+      "P5": "CTMSCS SII P5 - Minor Project",
+      "L1": "CTMSCS SII L1 - Network Security Laboratory",
+      "L2": "CTMSCS SII L2 - Malware Analysis Laboratory",
+      "L3": "CTMSCS SII L3 - Mobile Security Laboratory",
+      "L4": "CTMSCS SII L4 - Incident Response and Digital Forensics Laboratory"
+    },
+
+    "Semester III": {
+      "P1": "CTMSCS SIII P1 - Blockchain and Cryptocurrencies",
+      "P2": "CTMSCS SIII P2 - IoT Security and Forensics",
+      "P3": "CTMSCS SIII P3 - Cloud Security and Forensics",
+      "P4": "CTMSCS SIII P4 - Program Elective 1",
+      "P5": "CTMSCS SIII P5 - Program Elective 2",
+      "L1": "CTMSCS SIII L1 - Blockchain and Cryptocurrencies Laboratory",
+      "L2": "CTMSCS SIII L2 - IoT Security and Forensics Laboratory",
+      "L3": "CTMSCS SIII L3 - Cloud Security and Forensics Laboratory",
+      "L4": "CTMSCS SIII L4 - Program Elective 1 Laboratory",
+      "L5": "CTMSCS SIII L5 - Program Elective 2 Laboratory"
+    }
+  },
+  
+  "MTech AI & DS": {
+    "Semester I": {
+      "P1": "CTMTAIDS SI P1 - Mathematical and Computational Foundation for Artificial Intelligence",
+      "P2": "CTMTAIDS SI P2 - Network Security and Forensics",
+      "P3": "CTMTAIDS SI P3 - Incident Response and Audit Compliances",
+      "P4": "CTMTAIDS SI P4 - Fundamentals of Data Science and Machine Learning",
+      "P5": "CTMTAIDS SI P5 - Introduction to Forensic Science and Cyber Law",
+      "L1": "CTMTAIDS SI L1 - Mathematical and Computational Foundation for Artificial Intelligence Laboratory",
+      "L2": "CTMTAIDS SI L2 - Network Security and Forensics Laboratory",
+      "L3": "CTMTAIDS SI L3 - Incident Response and Audit Compliances Laboratory",
+      "L4": "CTMTAIDS SI L4 - Fundamentals of Data Science and Machine Learning Laboratory"
+    },
+
+    "Semester II": {
+      "P1": "CTMTAIDS SII P1 - Advanced Machine Learning for Cyber Security and Forensics",
+      "P2": "CTMTAIDS SII P2 - Mobile Security and Forensics",
+      "P3": "CTMTAIDS SII P3 - Natural Language Processing",
+      "P4": "CTMTAIDS SII P4 - Intelligent Systems and Security",
+      "P5": "CTMTAIDS SII P5 - Program Elective",
+      "L1": "CTMTAIDS SII L1 - Advanced Machine Learning for Cyber Security and Forensics Laboratory",
+      "L2": "CTMTAIDS SII L2 - Mobile Security and Forensics Laboratory",
+      "L3": "CTMTAIDS SII L3 - Natural Language Processing Laboratory",
+      "L4": "CTMTAIDS SII L4 - Intelligent Systems and Security Laboratory",
+      "L5": "CTMTAIDS SII L5 - Program Elective Laboratory",
+      "CDC": "Cyber Defense Center"
+    }
+  },
+  "MSc DFIS": {
+    "Semester I": {
+      "P1": "CTMSDFIS SI P1 - Computer Forensics",
+      "P2": "CTMSDFIS SI P2 - Cyber Security Audit and Compliance",
+      "P3": "CTMSDFIS SI P3 - Incident Response Management",
+      "P4": "CTMSDFIS SI P4 - Python & Scripting",
+      "P5": "CTMSDFIS SI P5 - Introduction to Forensic Science and Law",
+      "L1": "CTMSDFIS SI L1 - Computer Forensics Laboratory",
+      "L2": "CTMSDFIS SI L2 - Incident Response Management Laboratory",
+      "L3": "CTMSDFIS SI L3 - Python & Scripting Laboratory"
+    },
+
+    "Semester II": {
+      "P1": "CTMSDFIS SII P1 - Mobile Forensics",
+      "P2": "CTMSDFIS SII P2 - Web Application Security",
+      "P3": "CTMSDFIS SII P3 - Malware Analysis & Forensics",
+      "P4": "CTMSDFIS SII P4 - Artificial Intelligence",
+      "P5": "CTMSDFIS SII P5 - Minor Project",
+      "L1": "CTMSDFIS SII L1 - Mobile Forensics Laboratory",
+      "L2": "CTMSDFIS SII L2 - Web Application Security Laboratory",
+      "L3": "CTMSDFIS SII L3 - Malware Analysis & Forensics Laboratory",
+      "L4": "CTMSDFIS SII L4 - Artificial Intelligence Laboratory"
+    },
+
+    "Semester III": {
+      "P1": "CTMSDFIS SIII P1 - Network Security and Forensics",
+      "P2": "CTMSDFIS SIII P2 - IoT Security and Forensics",
+      "P3": "CTMSDFIS SIII P3 - Blockchain and Cryptocurrency",
+      "P4": "CTMSDFIS SIII P4 - Program Elective 1",
+      "P5": "CTMSDFIS SIII P5 - Program Elective 2",
+      "L1": "CTMSDFIS SIII L1 - Network Security and Forensics Laboratory",
+      "L2": "CTMSDFIS SIII L2 - IoT Security and Forensics Laboratory",
+      "L3": "CTMSDFIS SIII L3 - Blockchain and Cryptocurrency Laboratory",
+      "L4": "CTMSDFIS SIII L4 - Program Elective 1 Laboratory",
+      "L5": "CTMSDFIS SIII L5 - Program Elective 2 Laboratory"
+    }
+  }
+
+}

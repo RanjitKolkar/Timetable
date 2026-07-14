@@ -1,29 +1,45 @@
 import streamlit as st
 
-st.set_page_config(layout="wide")  # ✅ Must be the first Streamlit command
+# ✅ Must be the very first Streamlit command
+st.set_page_config(
+    layout="wide",
+    page_title="NFSU Goa Timetable Manager 2026-27",
+    page_icon="📚"
+)
 
-from components.viewer import show_timetable_viewer
-from components.admin import show_timetable_editor
-from components.faculty_view import show_faculty_view  # 👈 Import after setting config
-from components.load_distribution import show_faculty_load_distribution  # 👈 Add this import
+# ------------------ Import Components ------------------
+from components.viewer import show_viewer            # UPDATED name
+from components.admin import show_admin               # UPDATED name
+from components.faculty_view import show_faculty_view
+from components.load_distribution import show_faculty_load_distribution
 
-st.title("📚 NFSU Goa Timetable Manager 2025")
+# ------------------ App Header ------------------
+st.title("📚 NFSU Goa Timetable Manager 2026-27")
 
-# Version and last updated date (small text below the title)
 st.markdown(
     "<div style='font-size: 0.8em; color: gray;'>"
-    "Version 1.0.0 • Last updated: July 20, 2025"
+    "Version 1.0.0 • Academic Year 2026-27"
     "</div>",
     unsafe_allow_html=True
 )
 
-tabs = st.tabs(["📘 View Timetable", "👨‍🏫 Faculty View", "📊 Load Summary", "🛠️ Admin Panel"])
+# ------------------ Tabs ------------------
+tabs = st.tabs([
+    "📘 View Timetable",
+    "👨‍🏫 Faculty View",
+    "📊 Load Summary",
+    "🛠️ Admin Panel"
+])
 
+# ------------------ Tab Routing ------------------
 with tabs[0]:
-    show_timetable_viewer()
+    show_viewer()                     # ⬅ updated viewer (subject-code based)
+
 with tabs[1]:
-    show_faculty_view()
+    show_faculty_view()               # ⬅ faculty timetable (mapping-based)
+
 with tabs[2]:
-    show_faculty_load_distribution()  # 👈 New tab added
+    show_faculty_load_distribution()  # ⬅ load from subject_faculty_map + timetable
+
 with tabs[3]:
-    show_timetable_editor()
+    show_admin()                      # ⬅ updated admin (no regex, no hardcoding)
