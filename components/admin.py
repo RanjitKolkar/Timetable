@@ -4,6 +4,16 @@ import streamlit as st
 import pandas as pd
 import json
 
+# ------------------ Streamlit helpers ------------------
+
+def safe_rerun():
+    try:
+        st.experimental_rerun()
+    except AttributeError:
+        # Streamlit version may not expose experimental_rerun; fallback to a session_state flag.
+        st.session_state["_rerun_requested"] = not st.session_state.get("_rerun_requested", False)
+        st.info("UI refresh requested. Please refresh the page if changes do not appear automatically.")
+
 # ------------------ Load JSON ------------------
 with open("data/timetable.json") as f:
     timetables = json.load(f)
@@ -413,12 +423,14 @@ def build_common_subject_summary():
 
 
 # ------------------ Clash Checker (NO REGEX) ------------------
-def check_clashes(timetables, subject_faculty_map):
+def check_clashes(timetables, subject_faculty_map, parity=None):
     faculty_schedule = {}
     clashes = []
 
     for program, semesters in timetables.items():
         for semester, table in semesters.items():
+            if parity is not None and not semester_parity_matches(semester, parity):
+                continue
             for row in table:
                 time_slot = row[0]
                 for day_idx, subject_code in enumerate(row[1:], start=1):
@@ -559,7 +571,7 @@ def show_admin():
             if faculty_selection != "NEW FACULTY" and st.button("Delete Faculty", key="delete_faculty_btn"):
                 delete_faculty(faculty_selection)
                 st.success("✅ Faculty deleted.")
-                st.experimental_rerun()
+                safe_rerun()
 
     with fac_col_right:
         st.markdown("#### Faculty list")
@@ -663,7 +675,7 @@ def show_admin():
             if original_code and st.button("Delete Subject", key="delete_subject_btn"):
                 delete_subject(program, semester, original_code)
                 st.success("✅ Subject deleted.")
-                st.experimental_rerun()
+                safe_rerun()
 
         st.markdown("#### Subject summary for selected semester")
         st.dataframe(
@@ -720,7 +732,7 @@ def show_admin():
     )
 
     if st.button("Check Clashes", key="admin_clash_btn"):
-        clashes = check_clashes(timetables, subject_faculty_map)
+        clashes = check_clashes(timetables, subject_faculty_map, parity=semester_type)
         if clashes:
             st.error("❌ Faculty clashes found")
             for c in clashes:
