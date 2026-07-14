@@ -166,6 +166,17 @@ def get_semester_metadata(program, semester):
     return semester_metadata.get(program, {}).get(semester, {})
 
 
+def default_hours_for_subject_code(subject_code):
+    if not isinstance(subject_code, str) or not subject_code:
+        return 0
+    code = subject_code.strip().upper()
+    if code.startswith("P"):
+        return 3
+    if code.startswith("L"):
+        return 2
+    return 0
+
+
 def update_timetable_subject_code(program, semester, old_code, new_code):
     table = timetables.get(program, {}).get(semester, [])
     for row_index, row in enumerate(table):
@@ -251,7 +262,7 @@ def build_subject_table(program, semester):
             "Code": code,
             "Subject Name": name,
             "Faculty Codes": ", ".join(map_rows.get(code, [])),
-            "Hours/Week": metadata.get("hours_per_week", 0),
+            "Hours/Week": metadata.get("hours_per_week", default_hours_for_subject_code(code)),
             "Common": "Yes" if metadata.get("is_common", False) else "No"
         })
     return pd.DataFrame(rows)
@@ -473,10 +484,11 @@ def show_admin():
         )
 
         metadata = get_subject_metadata(program, semester, original_code) if original_code else {}
+        default_hours = metadata.get("hours_per_week", default_hours_for_subject_code(code_value if code_value else original_code))
         hours_per_week = st.number_input(
             "Hours per week",
             min_value=0,
-            value=int(metadata.get("hours_per_week", 0)),
+            value=int(default_hours),
             step=1,
             key="subject_editor_hours"
         )
@@ -517,7 +529,7 @@ def show_admin():
 
                     subject_faculty_map[program][semester][code_value] = normalize_faculty_codes(faculty_codes)
                     subject_metadata[program][semester][code_value] = {
-                        "hours_per_week": int(hours_per_week),
+                        "hours_per_week": int(hours_per_week or default_hours_for_subject_code(code_value)),
                         "is_common": bool(is_common)
                     }
 
