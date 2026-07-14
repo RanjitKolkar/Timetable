@@ -65,10 +65,142 @@
         "",
         ""
       ]
+    ],
+    "Semester I": [
+      [
+        "10.00 - 11.00",
+        "P5 (RL)",
+        "L2 (RJ)",
+        "Library/Mentoring",
+        "P2 (CK)",
+        "P5 (RL)"
+      ],
+      [
+        "11.00 - 12.00",
+        "P3 (RJ)",
+        "L2 (RJ)",
+        "P1 (HP)",
+        "P3 (RJ)",
+        "P4 (JD)"
+      ],
+      [
+        "12.00 - 01.00",
+        "P1 (HP)",
+        "P5 (RL)",
+        "P5 (RL)",
+        "P2 (CK)",
+        "P1 (HP)"
+      ],
+      [
+        "01.00 - 02.00",
+        "Lunch break",
+        "Lunch break",
+        "Lunch break",
+        "Lunch break",
+        "Lunch break"
+      ],
+      [
+        "02.00 - 03.00",
+        "P2 (CK)",
+        "P4 (JD)",
+        "L1 (HP)",
+        "P4 (JD)",
+        "P2 (CK)"
+      ],
+      [
+        "03.00 - 04.00",
+        "Library/Mentoring",
+        "P3 (RJ)",
+        "L1 (HP)",
+        "Library/Mentoring",
+        "Library/Mentoring"
+      ],
+      [
+        "04.00 - 05.00",
+        "Library/Mentoring",
+        "Library/Mentoring",
+        "L3 (JD)",
+        "Library/Mentoring",
+        "Library/Mentoring"
+      ],
+      [
+        "05.00 - 06.00",
+        "",
+        "",
+        "L3 (JD)",
+        "",
+        ""
+      ]
     ]
   },
   "MTech AI & DS": {
     "Semester II": [
+      [
+        "10.00 - 11.00",
+        "P1",
+        "P3 (JD)",
+        "P1 (RK)",
+        "P4 (RK)",
+        "P5 (RL)"
+      ],
+      [
+        "11.00 - 12.00",
+        "P3 (JD)",
+        "P2 (LC)",
+        "P3 (JD)",
+        "P1 (RK)",
+        "P2 (LC)"
+      ],
+      [
+        "12.00 - 01.00",
+        "P2 (LC)",
+        "P5 (RL)",
+        "P5 (RL)",
+        "Library/Mentoring",
+        "Library/Mentoring"
+      ],
+      [
+        "01.00 - 02.00",
+        "Lunch break",
+        "Lunch break",
+        "Lunch break",
+        "Lunch break",
+        "Lunch break"
+      ],
+      [
+        "02.00 - 03.00",
+        "L1 (RK)",
+        "P4 (RK)",
+        "P4 (RK)",
+        "L4 (RK)",
+        "L2 (LC)"
+      ],
+      [
+        "03.00 - 04.00",
+        "L1 (RK)",
+        "P1 (RK)",
+        "L3 (JD)",
+        "L4 (RK)",
+        "L2 (LC)"
+      ],
+      [
+        "04.00 - 05.00",
+        "Library/Mentoring",
+        "Library/Mentoring",
+        "L3 (JD)",
+        "Library/Mentoring",
+        "CDC (RK)"
+      ],
+      [
+        "05.00 - 06.00",
+        "Library/Mentoring",
+        "P4 (PC)",
+        "Library/Mentoring",
+        "P1 (TK)",
+        "P5 (HP)"
+      ]
+    ],
+    "Semester I": [
       [
         "10.00 - 11.00",
         "P1",
@@ -251,10 +383,192 @@
         "Library/Mentoring",
         ""
       ]
+    ],
+    "Semester I": [
+      [
+        "10.30 - 11.30 AM",
+        "P4 (MK)",
+        "P5 (IS)",
+        "P3 (SM)",
+        "P1 (MP)",
+        "P2 (IS)"
+      ],
+      [
+        "11.30 - 12.30 PM",
+        "P1 (MP)",
+        "P2 (SS)",
+        "P4 (MK)",
+        "P4 (MK)",
+        "P3 (SM)"
+      ],
+      [
+        "12.30 - 01.30 PM",
+        "",
+        "P4 (MK)",
+        "P5 (IS)",
+        "P2 (SS)",
+        ""
+      ],
+      [
+        "01.30 - 02.30 PM",
+        "Lunch break",
+        "Lunch break",
+        "Lunch break",
+        "Lunch break",
+        "Lunch break"
+      ],
+      [
+        "02.30 - 03.30 PM",
+        "P5 (IS)",
+        "P1 (MP)",
+        "P1 (MP)",
+        "P3 (SM)",
+        "P5 (SM)"
+      ],
+      [
+        "03.30 - 04.30 PM",
+        "P4 (MK)",
+        "P5 (IS)",
+        "P2 (IS,SS)",
+        "P5 (IS)",
+        "P4 (IS)"
+      ],
+      [
+        "04.30 - 05.30 PM",
+        "",
+        "Library/Mentoring",
+        "P3 (SM)",
+        "Library/Mentoring",
+        ""
+      ]
+    ],
+    "Semester III": [
+      [
+        "10.30 - 11.30 AM",
+        "P4 (MK)",
+        "P5 (IS)",
+        "P3 (SM)",
+        "P1 (MP)",
+        "P2 (IS)"
+      ],
+      [
+        "11.30 - 12.30 PM",
+        "P1 (MP)",
+        "P2 (SS)",
+        "P4 (MK)",
+        "P4 (MK)",
+        "P3 (SM)"
+      ],
+      [
+        "12.30 - 01.30 PM",
+        "",
+        "P4 (MK)",
+        "P5 (IS)",
+        "P2 (SS)",
+        ""
+      ],
+      [
+        "01.30 - 02.30 PM",
+        "Lunch break",
+        "Lunch break",
+        "Lunch break",
+        "Lunch break",
+        "Lunch break"
+      ],
+      [
+        "02.30 - 03.30 PM",
+        "P5 (IS)",
+        "P1 (MP)",
+        "P1 (MP)",
+        "P3 (SM)",
+        "P5 (SM)"
+      ],
+      [
+        "03.30 - 04.30 PM",
+        "P4 (MK)",
+        "P5 (IS)",
+        "P2 (IS,SS)",
+        "P5 (IS)",
+        "P4 (IS)"
+      ],
+      [
+        "04.30 - 05.30 PM",
+        "",
+        "Library/Mentoring",
+        "P3 (SM)",
+        "Library/Mentoring",
+        ""
+      ]
     ]
   },
   "M.Sc. Cyber Security": {
     "Semester II": [
+      [
+        "10.00 - 11.00",
+        "P5 (RL)",
+        "P4 (CK)",
+        "Library/Mentoring",
+        "P2 (CK)",
+        "P5 (RL)"
+      ],
+      [
+        "11.00 - 12.00",
+        "P4 (CK)",
+        "P3 (RJ)",
+        "P1 (LC)",
+        "P1 (LC)",
+        "P3 (RJ)"
+      ],
+      [
+        "12.00 - 01.00",
+        "Library/Mentoring",
+        "P5 (RL)",
+        "P5 (RL)",
+        "P2 (CK)",
+        "P4 (CK)"
+      ],
+      [
+        "01.00 - 02.00",
+        "Lunch break",
+        "Lunch break",
+        "Lunch break",
+        "Lunch break",
+        "Lunch break"
+      ],
+      [
+        "02.00 - 03.00",
+        "P2 (CK)",
+        "L3 (LC)",
+        "P3 (RJ)",
+        "L2 (RJ)",
+        "P2 (CK)"
+      ],
+      [
+        "03.00 - 04.00",
+        "P1 (LC)",
+        "L3 (LC)",
+        "Library/Mentoring",
+        "L2 (RJ)",
+        "L1 (CK)"
+      ],
+      [
+        "04.00 - 05.00",
+        "Library/Mentoring",
+        "Library/Mentoring",
+        "Library/Mentoring",
+        "Library/Mentoring",
+        "L1 (CK)"
+      ],
+      [
+        "05.00 - 06.00",
+        "Library/Mentoring",
+        "Library/Mentoring",
+        "Library/Mentoring",
+        "Library/Mentoring",
+        "Library/Mentoring"
+      ]
+    ],
+    "Semester I": [
       [
         "10.00 - 11.00",
         "P5 (RL)",

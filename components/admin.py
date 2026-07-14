@@ -343,6 +343,12 @@ def show_admin():
 
     semester = st.selectbox("Selected Semester", available_semesters, key="admin_semester")
 
+    table = timetables.get(program, {}).get(semester, [])
+    if not table:
+        table = [["", "", "", "", "", ""]]
+    day_names = ["Time"] + [f"DAY {i+1}" for i in range(len(table[0]) - 1)]
+    timetable_df = pd.DataFrame(table, columns=day_names)
+
     st.markdown(
         "<div style='padding:16px; border-radius:12px; background:#e8f5e9; border:1px solid #c8e6c9; margin-top:20px;'>"
         "<h3 style='margin:0; color:#256029;'>1. Edit Faculties</h3>"
@@ -412,6 +418,9 @@ def show_admin():
         "<div style='padding:16px; border-radius:12px; background:#fff8e1; border:1px solid #ffe082; margin-top:24px;'>"
         "<h3 style='margin:0; color:#8a6d3b;'>2. Edit Subjects for Selected Program/Semester</h3>"
         "<p style='margin:4px 0 0; color:#5f4d32;'>Update subject code, name, faculty mapping, hours per week, and mark if the subject is common.</p>"
+        "</div>",
+        unsafe_allow_html=True,
+    )
 
     with st.container():
         existing_codes = sorted(subjects.get(program, {}).get(semester, {}).keys())

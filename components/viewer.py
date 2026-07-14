@@ -1,3 +1,4 @@
+import re
 import streamlit as st
 import pandas as pd
 import json
@@ -7,6 +8,39 @@ from utils.image_exporter import generate_table_image
 # ------------------ Load JSON ------------------
 with open("data/timetable.json") as f:
     timetables = json.load(f)
+
+
+ROMAN_TO_INT = {
+    "I": 1,
+    "II": 2,
+    "III": 3,
+    "IV": 4,
+    "V": 5,
+    "VI": 6,
+    "VII": 7,
+    "VIII": 8,
+    "IX": 9,
+    "X": 10
+}
+
+
+def parse_semester_number(semester_name):
+    if not isinstance(semester_name, str):
+        return None
+    digits = [int(d) for d in re.findall(r"\d+", semester_name)]
+    if digits:
+        return digits[0]
+    roman_match = re.search(r"\b(I|II|III|IV|V|VI|VII|VIII|IX|X)\b", semester_name.upper())
+    if roman_match:
+        return ROMAN_TO_INT.get(roman_match.group(1))
+    return None
+
+
+def semester_parity_matches(semester_name, parity):
+    sem_number = parse_semester_number(semester_name)
+    if sem_number is None:
+        return True
+    return (sem_number % 2 == 1) if parity == "Odd" else (sem_number % 2 == 0)
 
 with open("data/subjects.json") as f:
     subjects = json.load(f)
@@ -40,16 +74,32 @@ def subject_summary(data):
 def show_viewer():
     st.title("🗓️ Timetable Viewer")
 
+    semester_type = st.radio(
+        "Semester type",
+        ["Odd", "Even"],
+        index=0,
+        horizontal=True,
+        key="viewer_semester_parity"
+    )
+
     # -------- Program & Semester --------
     program = st.selectbox(
-    "Select Program",
-    sorted(timetables.keys()),
-    key="viewer_program"
+        "Select Program",
+        sorted(timetables.keys()),
+        key="viewer_program"
     )
+
+    filtered_semesters = [
+        sem for sem in sorted(timetables[program].keys())
+        if semester_parity_matches(sem, semester_type)
+    ]
+    if not filtered_semesters:
+        st.warning(f"No {semester_type.lower()} semesters found for {program}. Showing all semesters instead.")
+        filtered_semesters = sorted(timetables[program].keys())
 
     semester = st.selectbox(
         "Select Semester",
-        sorted(timetables[program].keys()),
+        filtered_semesters,
         key="viewer_semester"
     )
 
