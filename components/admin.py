@@ -22,6 +22,12 @@ try:
 except FileNotFoundError:
     subject_metadata = {}
 
+try:
+    with open("data/semester_metadata.json") as f:
+        semester_metadata = json.load(f)
+except FileNotFoundError:
+    semester_metadata = {}
+
 # ------------------ Helpers ------------------
 def save_json(data, path):
     with open(path, "w") as f:
@@ -41,6 +47,7 @@ def save_all_state():
     save_json(subjects, "data/subjects.json")
     save_json(subject_faculty_map, "data/subject_faculty_map.json")
     save_json(subject_metadata, "data/subject_metadata.json")
+    save_json(semester_metadata, "data/semester_metadata.json")
 
 
 def get_program_semesters(program):
@@ -49,6 +56,7 @@ def get_program_semesters(program):
         | set(subjects.get(program, {}))
         | set(subject_faculty_map.get(program, {}))
         | set(subject_metadata.get(program, {}))
+        | set(semester_metadata.get(program, {}))
     )
 
 
@@ -96,6 +104,8 @@ def delete_program(program):
         del subject_faculty_map[program]
     if program in subject_metadata:
         del subject_metadata[program]
+    if program in semester_metadata:
+        del semester_metadata[program]
     save_all_state()
 
 
@@ -108,6 +118,8 @@ def delete_semester(program, semester):
         del subject_faculty_map[program][semester]
     if program in subject_metadata and semester in subject_metadata[program]:
         del subject_metadata[program][semester]
+    if program in semester_metadata and semester in semester_metadata[program]:
+        del semester_metadata[program][semester]
     save_all_state()
 
 
@@ -148,6 +160,10 @@ def normalize_faculty_codes(value):
 
 def get_subject_metadata(program, semester, subject_code):
     return subject_metadata.get(program, {}).get(semester, {}).get(subject_code, {})
+
+
+def get_semester_metadata(program, semester):
+    return semester_metadata.get(program, {}).get(semester, {})
 
 
 def update_timetable_subject_code(program, semester, old_code, new_code):
@@ -194,10 +210,13 @@ def rename_program(old_program, new_program):
         subject_faculty_map[new_program] = subject_faculty_map.pop(old_program)
     if old_program in subject_metadata:
         subject_metadata[new_program] = subject_metadata.pop(old_program)
+    if old_program in semester_metadata:
+        semester_metadata[new_program] = semester_metadata.pop(old_program)
     save_json(timetables, "data/timetable.json")
     save_json(subjects, "data/subjects.json")
     save_json(subject_faculty_map, "data/subject_faculty_map.json")
     save_json(subject_metadata, "data/subject_metadata.json")
+    save_json(semester_metadata, "data/semester_metadata.json")
 
 
 def rename_semester(program, old_semester, new_semester):
@@ -213,10 +232,13 @@ def rename_semester(program, old_semester, new_semester):
         subject_faculty_map[program][new_semester] = subject_faculty_map[program].pop(old_semester)
     if old_semester in subject_metadata.get(program, {}):
         subject_metadata[program][new_semester] = subject_metadata[program].pop(old_semester)
+    if old_semester in semester_metadata.get(program, {}):
+        semester_metadata[program][new_semester] = semester_metadata[program].pop(old_semester)
     save_json(timetables, "data/timetable.json")
     save_json(subjects, "data/subjects.json")
     save_json(subject_faculty_map, "data/subject_faculty_map.json")
     save_json(subject_metadata, "data/subject_metadata.json")
+    save_json(semester_metadata, "data/semester_metadata.json")
 
 
 def build_subject_table(program, semester):
@@ -513,6 +535,22 @@ def show_admin():
             build_subject_table(program, semester),
             use_container_width=True,
         )
+
+        current_semester_metadata = get_semester_metadata(program, semester)
+        room_number_value = current_semester_metadata.get("room_number", "")
+
+        st.markdown("#### Semester room assignment")
+        room_number_input = st.text_input(
+            "Room Number",
+            value=room_number_value,
+            key="semester_room_number"
+        ).strip()
+
+        if st.button("Save Room Number", key="save_room_number_btn"):
+            ensure_nested_dict(semester_metadata, program, semester)
+            semester_metadata[program][semester]["room_number"] = room_number_input
+            save_all_state()
+            st.success("✅ Room number saved for selected semester.")
 
         common_df = build_common_subject_summary()
         if not common_df.empty:

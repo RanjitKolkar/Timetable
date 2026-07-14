@@ -3,7 +3,7 @@ import streamlit as st
 import pandas as pd
 import json
 from collections import defaultdict
-from utils.image_exporter import generate_table_image
+from utils.image_exporter import generate_table_image, subject_colors
 
 # ------------------ Load JSON ------------------
 with open("data/timetable.json") as f:
@@ -42,6 +42,13 @@ def semester_parity_matches(semester_name, parity):
         return True
     return (sem_number % 2 == 1) if parity == "Odd" else (sem_number % 2 == 0)
 
+
+def extract_subject_code(cell):
+    if not isinstance(cell, str):
+        return ""
+    cell = cell.strip()
+    return cell.split()[0] if cell else ""
+
 with open("data/subjects.json") as f:
     subjects = json.load(f)
 
@@ -51,14 +58,11 @@ with open("data/faculties.json") as f:
 with open("data/subject_faculty_map.json") as f:
     subject_faculty_map = json.load(f)
 
-# ------------------ Subject Colors ------------------
-subject_colors = {
-    "P1": "#d6eaf8", "P2": "#d1f2eb", "P3": "#f9e79f",
-    "P4": "#f5cba7", "P5": "#f7dc6f",
-    "L1": "#fadbd8", "L2": "#e8daef",
-    "L3": "#d5f5e3", "L4": "#fcf3cf", "L5": "#f0b27a",
-    "CDC": "#d7bde2"
-}
+try:
+    with open("data/semester_metadata.json") as f:
+        semester_metadata = json.load(f)
+except FileNotFoundError:
+    semester_metadata = {}
 
 # ------------------ Subject Summary ------------------
 def subject_summary(data):
@@ -67,8 +71,41 @@ def subject_summary(data):
         for cell in row[1:]:
             cell = str(cell).strip()
             if cell and cell not in ["Lunch break", "Library/Mentoring"]:
-                counts[cell] += 1
+                code = extract_subject_code(cell)
+                if code:
+                    counts[code] += 1
     return counts
+
+
+DEFAULT_SUBJECT_COLOR = "#eef"
+
+def render_subject_summary(summary, subject_names):
+    if not summary:
+        return
+
+    html = (
+        "<table style='border-collapse:collapse;width:100%;font-family:Arial,sans-serif;'>"
+        "<tr>"
+        "<th style='background:#333;color:#fff;padding:10px;border:1px solid #999;text-align:left;'>Code</th>"
+        "<th style='background:#333;color:#fff;padding:10px;border:1px solid #999;text-align:left;'>Subject</th>"
+        "<th style='background:#333;color:#fff;padding:10px;border:1px solid #999;text-align:right;'>Classes / Week</th>"
+        "</tr>"
+    )
+
+    for code, count in sorted(summary.items(), key=lambda item: (-item[1], item[0])):
+        color = subject_colors.get(code, DEFAULT_SUBJECT_COLOR)
+        subject_name = subject_names.get(code, "Unknown Subject")
+        html += (
+            "<tr>"
+            f"<td style='background:{color};padding:10px;border:1px solid #999;font-weight:bold;'>{code}</td>"
+            f"<td style='background:{color};padding:10px;border:1px solid #999;'>{subject_name}</td>"
+            f"<td style='background:{color};padding:10px;border:1px solid #999;text-align:right;'>{count}</td>"
+            "</tr>"
+        )
+
+    html += "</table>"
+    st.markdown(html, unsafe_allow_html=True)
+
 
 # ------------------ Viewer UI ------------------
 def show_viewer():
@@ -106,6 +143,7 @@ def show_viewer():
 
     data = timetables[program][semester]
     subject_names = subjects.get(program, {}).get(semester, {})
+    room_number = semester_metadata.get(program, {}).get(semester, {}).get("room_number", "")
 
     days = ["Time"] + [f"DAY {i+1}" for i in range(len(data[0]) - 1)]
 
@@ -144,15 +182,15 @@ def show_viewer():
 
             # Subject cells
             elif cell:
-                color = subject_colors.get(cell, "#eef")
+                code = extract_subject_code(cell)
+                color = subject_colors.get(code, DEFAULT_SUBJECT_COLOR)
 
                 faculty_list = (
                     subject_faculty_map
                     .get(program, {})
                     .get(semester, {})
-                    .get(cell, [])
+                    .get(code, [])
                 )
-
                 faculty_suffix = ""
                 if faculty_list:
                     faculty_suffix = " (" + ",".join(faculty_list) + ")"
@@ -173,9 +211,15 @@ def show_viewer():
 
     st.markdown(html, unsafe_allow_html=True)
 
+    if room_number:
+        st.markdown(f"**Room:** {room_number}")
+
     # -------- Download Image --------
     df_image = pd.DataFrame(data, columns=days)
-    img = generate_table_image(df_image, f"{program} - {semester}")
+    title_text = f"{program} - {semester}"
+    if room_number:
+        title_text += f"\nRoom {room_number}"
+    img = generate_table_image(df_image, title_text)
     st.download_button(
         label="📥 Download Timetable as PNG",
         data=img,
@@ -210,14 +254,7 @@ def show_viewer():
 
     summary = subject_summary(data)
     if summary:
-        st.dataframe(
-            pd.DataFrame(
-                [(k, subject_names.get(k, "Unknown Subject"), v)
-                 for k, v in summary.items()],
-                columns=["Code", "Subject", "Classes / Week"]
-            ),
-            use_container_width=True
-        )
+        render_subject_summary(summary, subject_names)
     else:
         st.info("No classes found.")
 
