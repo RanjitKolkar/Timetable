@@ -23,33 +23,40 @@ def get_cell_color(content: str) -> str:
     return "#ffffff"
 
 def generate_table_image(data: pd.DataFrame, title: str) -> io.BytesIO:
-    cell_width = 200
-    cell_height = 60
-    font_size = 18
-    padding = 10
+    cell_width = 220
+    cell_height = 70
+    title_font_size = 28
+    cell_font_size = 20
+    padding = 12
 
     rows, cols = data.shape
     title_lines = [line.strip() for line in title.split("\n") if line.strip()]
 
-    image = Image.new("RGB", (cell_width * cols, cell_height * (rows + 1) + padding * 3 + font_size * len(title_lines)), "white")
+    image = Image.new(
+        "RGB",
+        (cell_width * cols, cell_height * (rows + 1) + padding * 4 + title_font_size * len(title_lines)),
+        "white"
+    )
     draw = ImageDraw.Draw(image)
 
     try:
-        font = ImageFont.truetype("arial.ttf", font_size)
+        title_font = ImageFont.truetype("arial.ttf", title_font_size)
+        cell_font = ImageFont.truetype("arial.ttf", cell_font_size)
     except IOError:
-        font = ImageFont.load_default()
+        title_font = ImageFont.load_default()
+        cell_font = ImageFont.load_default()
 
     # Title
     title_height = padding
-    line_height = font_size + 6
+    line_height = title_font_size + 8
     for idx, line in enumerate(title_lines):
         try:
-            text_width = draw.textlength(line, font=font)
+            text_width = draw.textlength(line, font=title_font)
         except AttributeError:
-            text_width = draw.textsize(line, font=font)[0]
+            text_width = draw.textsize(line, font=title_font)[0]
         x = max((image.width - text_width) / 2, padding)
         y = title_height + idx * line_height
-        draw.text((x, y), line, fill="black", font=font)
+        draw.text((x, y), line, fill="black", font=title_font)
     title_height += len(title_lines) * line_height
     title_height += padding
 
@@ -58,7 +65,7 @@ def generate_table_image(data: pd.DataFrame, title: str) -> io.BytesIO:
         x = j * cell_width
         y = title_height
         draw.rectangle([x, y, x + cell_width, y + cell_height], outline="black", fill="#cccccc")
-        draw.text((x + padding, y + padding), str(col), fill="black", font=font)
+        draw.text((x + padding, y + padding), str(col), fill="black", font=cell_font)
 
     # Table cells
     for i, row in data.iterrows():
@@ -67,7 +74,7 @@ def generate_table_image(data: pd.DataFrame, title: str) -> io.BytesIO:
             y = title_height + cell_height + i * cell_height
             bg_color = get_cell_color(str(cell))
             draw.rectangle([x, y, x + cell_width, y + cell_height], outline="black", fill=bg_color)
-            draw.text((x + padding, y + padding), str(cell), fill="black", font=font)
+            draw.text((x + padding, y + padding), str(cell), fill="black", font=cell_font)
 
     buf = io.BytesIO()
     image.save(buf, format="PNG")

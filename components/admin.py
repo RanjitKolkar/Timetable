@@ -1,3 +1,4 @@
+import copy
 import re
 import streamlit as st
 import pandas as pd
@@ -51,7 +52,7 @@ def save_all_state():
 
 
 def get_program_semesters(program):
-    return sorted(
+    return sort_semesters(
         set(timetables.get(program, {}))
         | set(subjects.get(program, {}))
         | set(subject_faculty_map.get(program, {}))
@@ -72,6 +73,23 @@ ROMAN_TO_INT = {
     "IX": 9,
     "X": 10
 }
+
+INT_TO_ROMAN = {value: key for key, value in ROMAN_TO_INT.items()}
+
+
+def build_semester_name(number):
+    roman = INT_TO_ROMAN.get(number)
+    return f"Semester {roman}" if roman else f"Semester {number}"
+
+
+def sort_semesters(semesters):
+    return sorted(
+        semesters,
+        key=lambda sem: (
+            parse_semester_number(sem) if parse_semester_number(sem) is not None else 999,
+            sem
+        )
+    )
 
 
 def parse_semester_number(semester_name):
@@ -120,6 +138,65 @@ def delete_semester(program, semester):
         del subject_metadata[program][semester]
     if program in semester_metadata and semester in semester_metadata[program]:
         del semester_metadata[program][semester]
+    save_all_state()
+
+
+def clone_semester_data(program, source_semester, target_semester):
+    timetables.setdefault(program, {})
+    subjects.setdefault(program, {})
+    subject_faculty_map.setdefault(program, {})
+    subject_metadata.setdefault(program, {})
+    semester_metadata.setdefault(program, {})
+
+    if source_semester in timetables.get(program, {}):
+        timetables[program][target_semester] = copy.deepcopy(timetables[program][source_semester])
+    if source_semester in subjects.get(program, {}):
+        subjects[program][target_semester] = copy.deepcopy(subjects[program][source_semester])
+    if source_semester in subject_faculty_map.get(program, {}):
+        subject_faculty_map[program][target_semester] = copy.deepcopy(subject_faculty_map[program][source_semester])
+    if source_semester in subject_metadata.get(program, {}):
+        subject_metadata[program][target_semester] = copy.deepcopy(subject_metadata[program][source_semester])
+    if source_semester in semester_metadata.get(program, {}):
+        semester_metadata[program][target_semester] = copy.deepcopy(semester_metadata[program][source_semester])
+
+
+def create_blank_semester(program, target_semester, template_semester=None):
+    timetables.setdefault(program, {})
+    subjects.setdefault(program, {})
+    subject_faculty_map.setdefault(program, {})
+    subject_metadata.setdefault(program, {})
+    semester_metadata.setdefault(program, {})
+
+    if template_semester in timetables.get(program, {}):
+        template = timetables[program][template_semester]
+        rows = len(template)
+        cols = len(template[0]) if template else 6
+    else:
+        rows = 10
+        cols = 6
+    timetables[program][target_semester] = [["" for _ in range(cols)] for _ in range(rows)]
+    subjects[program][target_semester] = {}
+    subject_faculty_map[program][target_semester] = {}
+    subject_metadata[program][target_semester] = {}
+    semester_metadata[program][target_semester] = {}
+
+
+def generate_missing_semesters(program, total_semesters=10):
+    existing = set(get_program_semesters(program))
+    base_odd = "Semester I"
+    base_even = "Semester II"
+
+    for sem_number in range(1, total_semesters + 1):
+        sem_name = build_semester_name(sem_number)
+        if sem_name in existing:
+            continue
+
+        if sem_number % 2 == 1 and base_odd in get_program_semesters(program):
+            clone_semester_data(program, base_odd, sem_name)
+        elif sem_number % 2 == 0 and base_even in get_program_semesters(program):
+            clone_semester_data(program, base_even, sem_name)
+        else:
+            create_blank_semester(program, sem_name, template_semester=base_odd if base_odd in get_program_semesters(program) else None)
     save_all_state()
 
 
@@ -373,6 +450,11 @@ def show_admin():
     if not available_semesters:
         st.warning(f"No {semester_type.lower()} semesters found for {program}.")
         return
+
+    if st.button("Generate missing semesters for 10-semester programs", key="generate_semesters_btn"):
+        generate_missing_semesters(program, total_semesters=10)
+        st.success("✅ Missing semesters generated for this program.")
+        st.experimental_rerun()
 
     semester = st.selectbox("Selected Semester", available_semesters, key="admin_semester")
 

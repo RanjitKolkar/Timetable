@@ -4,7 +4,7 @@ import json
 import re
 from collections import defaultdict
 from data.timetable import days, time_slots
-from utils.image_exporter import generate_table_image
+from utils.image_exporter import generate_table_image, get_cell_color
 
 
 # --- Load JSON data ---
@@ -80,52 +80,35 @@ def show_faculty_view():
     consolidated, program_tables, detailed_load = extract_faculty_cells(timetables, faculty_code)
 
     # --- Consolidated View ---
-    # --- Consolidated View with Color ---
     st.markdown("## 📅 Consolidated Timetable")
 
-    # Color mapping for tags
-    color_map = {
-        "CS": "#d0ebff",  # light blue
-        "DF": "#ffd6a5",  # light orange
-        "MT": "#caffbf",  # light green
-        "FS": "#ffadad",  # light red
-    }
+    def render_colored_table(rows, columns):
+        html = "<table style='border-collapse: collapse; width: 100%; text-align:center;'>"
+        html += "<tr>" + "".join(
+            [f"<th style='background:#333;color:#fff;padding:8px;border:1px solid #999;'>{col}</th>" for col in columns]
+        ) + "</tr>"
+        for row in rows:
+            html += "<tr>"
+            for i, cell in enumerate(row):
+                cell_str = str(cell).strip()
+                if i == 0:
+                    html += (
+                        "<td style='background:#f1f1f1;font-weight:bold;padding:8px;border:1px solid #999;'>"
+                        f"{cell_str}</td>"
+                    )
+                else:
+                    bg_color = get_cell_color(cell_str)
+                    html += (
+                        "<td style='background:"
+                        f"{bg_color};padding:8px;border:1px solid #999;font-weight:bold;'>{cell_str}</td>"
+                    )
+            html += "</tr>"
+        html += "</table>"
+        return html
 
-    # Helper to extract tag and wrap in color
-    def colorize_cell(cell):
-        match = re.search(r"\[(\w+)\]", cell)
-        if match:
-            tag = match.group(1)
-            prog = ''.join(filter(str.isalpha, tag))
-            color = color_map.get(prog, "#e0e0e0")  # fallback gray
-            return f'<td style="background-color:{color}; padding:4px;">{cell}</td>'
-        return f"<td>{cell}</td>"
+    st.markdown(render_colored_table(consolidated, days), unsafe_allow_html=True)
 
-    # Construct HTML table
-    html = "<table style='border-collapse: collapse; width: 100%;'>"
-    # Header row
-    html += "<tr>" + "".join([f"<th style='background:#333;color:#fff;padding:6px;'>{day}</th>" for day in days]) + "</tr>"
-
-    # Data rows
-    for row in consolidated:
-        html += "<tr>"
-        for i, cell in enumerate(row):
-            if i == 0:
-                html += f"<td style='background:#f1f1f1;font-weight:bold;padding:4px;'>{cell}</td>"
-            else:
-                html += colorize_cell(cell)
-        html += "</tr>"
-
-    html += "</table>"
-    st.markdown(html, unsafe_allow_html=True)
-
-    legend_html = "<div style='display: flex; gap: 5px;'>"
-    for key, color in color_map.items():
-        legend_html += f"<div style='background:{color};padding:6px 12px;border-radius:4px;'>{key}</div>"
-    legend_html += "</div>"
-    st.markdown(legend_html, unsafe_allow_html=True)
-
-    # Create df_consolidated for image generation (without colors)
+    # Create df_consolidated for image generation
     df_consolidated = pd.DataFrame(consolidated, columns=days)
     # Downloadable image
     image_buf = generate_table_image(df_consolidated, f"Consolidated Timetable for {faculty_code}")
@@ -141,7 +124,7 @@ def show_faculty_view():
         st.markdown("## 📘 Timetable by Program & Semester")
         for key, df in program_tables.items():
             st.markdown(f"### {key}")
-            st.dataframe(df, use_container_width=True)
+            st.markdown(render_colored_table(df.values.tolist(), df.columns), unsafe_allow_html=True)
     else:
         st.info("No teaching assignments found for this faculty.")
 

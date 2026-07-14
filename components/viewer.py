@@ -24,6 +24,16 @@ ROMAN_TO_INT = {
 }
 
 
+def sort_semesters(semesters):
+    return sorted(
+        semesters,
+        key=lambda sem: (
+            parse_semester_number(sem) if parse_semester_number(sem) is not None else 999,
+            sem
+        )
+    )
+
+
 def parse_semester_number(semester_name):
     if not isinstance(semester_name, str):
         return None
@@ -127,7 +137,7 @@ def show_viewer():
     )
 
     filtered_semesters = [
-        sem for sem in sorted(timetables[program].keys())
+        sem for sem in sort_semesters(timetables[program].keys())
         if semester_parity_matches(sem, semester_type)
     ]
     if not filtered_semesters:
@@ -148,7 +158,10 @@ def show_viewer():
     days = ["Time"] + [f"DAY {i+1}" for i in range(len(data[0]) - 1)]
 
     # -------- HTML Timetable (WITH FACULTY DISPLAY) --------
-    st.markdown("## 🗓️ Weekly Timetable")
+    timetable_heading = f"## 🗓️ {program} — {semester}"
+    if room_number:
+        timetable_heading += f" — Room {room_number}"
+    st.markdown(timetable_heading)
 
     html = "<table style='border-collapse:collapse;width:100%;text-align:center;'>"
 
